@@ -12,6 +12,6 @@ server.use('/api/actions', actionsRoutes);
 server.use('/api/projects', projectsRoutes);
 
 server.use("/", (req, res) => {
-    res.send("API working!");
+    res.send("<h1>API working!</h1>");
 })
 module.exports = server;
