@@ -59,6 +59,21 @@ router.delete('/:id', (req, res, next) => {
            .catch(next)
 })
 
+// `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
+router.get('/:id/actions', (req, res, next) => {
+    const { id } = req.params;
+    Project.getProjectActions(id)
+           .then(actions => {
+               if(!actions){
+                   res.status(404).json({ message: `project id:${id} not found.`});
+               } else {
+                   res.status(200).json(actions);
+               }
+           })
+           .catch(next)
+})
+
+
 router.use((err, req, res, next) => {
     res.status(500).json({
         message: err.message,
